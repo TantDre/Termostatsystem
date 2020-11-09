@@ -24,12 +24,9 @@ Servo servoT;
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
 // ---- Global variables ----
-float currTemp = 30.0;
+float currTemp = 20.0;
 float calibration = 23.10 - 22.7; // DHT - Fluke  // 2020-11-09
 float refTemp = 23.0;
-int preServo = 90;
-int servoCount = 10;
-
 
 // ---------- Setup ----------
 void setup() 
@@ -47,10 +44,10 @@ void setup()
   dht.begin();
   Serial.println(F("Sensor is now online"));
 
-  // Add and center the servo
+  // Add and move to off
   servoT.attach(MGPIN);
-  servoT.write(90);
-  Serial.println(F("Servo is now at position 90 (Center)")); 
+  servoT.write(0);
+  Serial.println(F("Servo is now at position 0 (Off)")); 
   
   // Done
   Serial.println(F("Termostat is now running:"));
@@ -59,9 +56,6 @@ void setup()
 // ---------- Loop ----------
 void loop() 
 {
-  // Variables
-  int setServo;
-  
   // Get temperature
   digitalWrite(DHT5V, HIGH);
   delay(1000);
@@ -84,24 +78,13 @@ void loop()
   // Temperature logic for servo control
   if (currTemp >= refTemp)
   {
-    setServo = 0;
+    servoT.write(0);
+    Serial.println(F("Servo is now ar position 0 (Off)"));
     
-  }else
+  }else if (currTemp <= (refTemp -1))
   {
-    setServo = 180;
-  }
-
-  // Update count
-  (setServo != preServo) ? servoCount++ : servoCount;
-  preServo = setServo;
-  Serial.println(servoCount);
-
-  // Move servo if 10 change request
-  if (servoCount >= 10)
-  {
-    servoT.write(setServo);
-    Serial.println(setServo);
-    servoCount = 0;
+    servoT.write(180);
+    Serial.println(F("Servo is now ar position 180 (On)"));
   }
  
   // Wait for next cycle
