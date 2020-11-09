@@ -26,7 +26,7 @@ DHT_Unified dht(DHTPIN, DHTTYPE);
 // ---- Global variables ----
 float currTemp = 20.0;
 float calibration = 23.10 - 22.7; // DHT - Fluke  // 2020-11-09
-float refTemp = 23.0;
+float refTemp = 22.0;
 
 // ---------- Setup ----------
 void setup() 
@@ -88,5 +88,5 @@ void loop()
   }
  
   // Wait for next cycle
-  delay(9000);
+  delay(59000);
 }
