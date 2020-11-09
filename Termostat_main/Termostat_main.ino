@@ -16,6 +16,11 @@ Servo servoT;
 #define DHTTYPE DHT22
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
+// ---- Global variables ----
+float currTemp = 30.0;
+float calibration = 23.8 - 22.8;  // 2020-11-09
+float refTemp = 23.0;
+
 // ---------- Setup ----------
 void setup() 
 {
@@ -30,10 +35,12 @@ void setup()
 
   // Begin Sensor
   dht.begin();
+  Serial.println(F("Sensor is now online"));
 
   // Add and center the servo
   servoT.attach(MGPIN);
   servoT.write(90);
+  Serial.println(F("Servo is now at position 90")); 
   
   // Done
   Serial.println(F("Termostat is now running:"));
@@ -42,16 +49,10 @@ void setup()
 // ---------- Loop ----------
 void loop() 
 {
-  // Variables
-  float currTemp;
-  sensors_event_t event;
-
-  // Calibration (DHT22 - Fluke)
-  float calibration = 23.8 - 22.8;  // 2020-11-09
-  
   // Get temperature
   digitalWrite(DHT5V, HIGH);
   delay(1000);
+  sensors_event_t event;
   dht.temperature().getEvent(&event);
   digitalWrite(DHT5V, LOW);
 
@@ -67,6 +68,18 @@ void loop()
     Serial.println(currTemp);
   }
 
+  // Temperature logic for servo control
+  if (currTemp >= refTemp)
+  {
+    servoT.write(0);
+    Serial.println(F("Servo is now at position 0")); 
+    
+  }else
+  {
+    servoT.write(180);
+    Serial.println(F("Servo is now at position 180")); 
+  }
+  
   // Wait for next cycle
-  delay(4000);
+  delay(9000);
 }
