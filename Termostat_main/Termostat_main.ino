@@ -6,30 +6,40 @@
 // Inculdes Servo
 #include <Servo.h>
 
-// DHT Setup
+// MG995 Setup
+Servo servoT;
+#define MGPIN 9
+
+// DHT22 Setup
 #define DHTPIN 12
 #define DHT5V 13
 #define DHTTYPE DHT22
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
-// ----- Setup -----
+// ---------- Setup ----------
 void setup() 
 {
+  // Begin Serial
+  Serial.begin(9600);
+  
   // Pullup resistor for data signal
   pinMode(DHTPIN, INPUT_PULLUP);
 
   // 5V Pin to Sensor
   pinMode(DHT5V, OUTPUT);
 
-  // Begin streams
-  Serial.begin(9600);
+  // Begin Sensor
   dht.begin();
 
-  // Init print
+  // Add and center the servo
+  servoT.attach(MGPIN);
+  servoT.write(90);
+  
+  // Done
   Serial.println(F("Termostat is now running:"));
 }
 
-// ----- Loop -----
+// ---------- Loop ----------
 void loop() 
 {
   // Variables
