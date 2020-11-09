@@ -7,7 +7,8 @@
 #include <Servo.h>
 
 // DHT Setup
-#define DHTPIN 2
+#define DHTPIN 12
+#define DHT5V 13
 #define DHTTYPE DHT22
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
@@ -15,7 +16,10 @@ DHT_Unified dht(DHTPIN, DHTTYPE);
 void setup() 
 {
   // Pullup resistor for data signal
-  pinMode(2, INPUT_PULLUP);
+  pinMode(DHTPIN, INPUT_PULLUP);
+
+  // 5V Pin to Sensor
+  pinMode(DHT5V, OUTPUT);
 
   // Begin streams
   Serial.begin(9600);
@@ -36,7 +40,10 @@ void loop()
   float calibration = 23.8 - 22.8;  // 2020-11-09
   
   // Get temperature
+  digitalWrite(DHT5V, HIGH);
+  delay(1000);
   dht.temperature().getEvent(&event);
+  digitalWrite(DHT5V, LOW);
 
   // Save and print temperature
   if (isnan(event.temperature)) {
@@ -51,5 +58,5 @@ void loop()
   }
 
   // Wait for next cycle
-  delay(5000);
+  delay(4000);
 }
