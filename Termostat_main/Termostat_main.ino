@@ -1,3 +1,10 @@
+/*
+  ------------------------------
+    Thermostat Control System
+    Verision: 1.0
+  ------------------------------
+*/
+
 // Includes Temperature
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
@@ -18,7 +25,7 @@ DHT_Unified dht(DHTPIN, DHTTYPE);
 
 // ---- Global variables ----
 float currTemp = 30.0;
-float calibration = 23.8 - 22.8;  // 2020-11-09
+float calibration = 23.10 - 22.7; // DHT - Fluke  // 2020-11-09
 float refTemp = 23.0;
 
 // ---------- Setup ----------
@@ -40,7 +47,7 @@ void setup()
   // Add and center the servo
   servoT.attach(MGPIN);
   servoT.write(90);
-  Serial.println(F("Servo is now at position 90")); 
+  Serial.println(F("Servo is now at position 90 (Center)")); 
   
   // Done
   Serial.println(F("Termostat is now running:"));
@@ -72,12 +79,12 @@ void loop()
   if (currTemp >= refTemp)
   {
     servoT.write(0);
-    Serial.println(F("Servo is now at position 0")); 
+    Serial.println(F("Servo is now at position 0 (Off)")); 
     
   }else
   {
     servoT.write(180);
-    Serial.println(F("Servo is now at position 180")); 
+    Serial.println(F("Servo is now at position 180 (On)")); 
   }
   
   // Wait for next cycle
