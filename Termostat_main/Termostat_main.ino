@@ -27,6 +27,9 @@ DHT_Unified dht(DHTPIN, DHTTYPE);
 float currTemp = 30.0;
 float calibration = 23.10 - 22.7; // DHT - Fluke  // 2020-11-09
 float refTemp = 23.0;
+int preServo = 90;
+int servoCount = 10;
+
 
 // ---------- Setup ----------
 void setup() 
@@ -56,6 +59,9 @@ void setup()
 // ---------- Loop ----------
 void loop() 
 {
+  // Variables
+  int setServo;
+  
   // Get temperature
   digitalWrite(DHT5V, HIGH);
   delay(1000);
@@ -78,15 +84,26 @@ void loop()
   // Temperature logic for servo control
   if (currTemp >= refTemp)
   {
-    servoT.write(0);
-    Serial.println(F("Servo is now at position 0 (Off)")); 
+    setServo = 0;
     
   }else
   {
-    servoT.write(180);
-    Serial.println(F("Servo is now at position 180 (On)")); 
+    setServo = 180;
   }
-  
+
+  // Update count
+  (setServo != preServo) ? servoCount++ : servoCount;
+  preServo = setServo;
+  Serial.println(servoCount);
+
+  // Move servo if 10 change request
+  if (servoCount >= 10)
+  {
+    servoT.write(setServo);
+    Serial.println(setServo);
+    servoCount = 0;
+  }
+ 
   // Wait for next cycle
   delay(9000);
 }
