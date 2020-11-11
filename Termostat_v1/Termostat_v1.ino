@@ -79,12 +79,12 @@ void loop()
   if (currTemp >= refTemp)
   {
     servoT.write(180);
-    Serial.println(F("Servo is now ar position 180 (Off)"));
+    Serial.println(F("Servo is now at position 180 (Off)"));
     
   }else if (currTemp <= (refTemp -1))
   {
     servoT.write(0);
-    Serial.println(F("Servo is now ar position 0 (On)"));
+    Serial.println(F("Servo is now at position 0 (On)"));
   }
  
   // Wait for next cycle
