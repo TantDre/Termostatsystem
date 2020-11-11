@@ -56,7 +56,7 @@ void loop()
 {
   // Get temperature
   digitalWrite(DHT5V, HIGH);
-  delay(1000);
+  delay(5000);
   sensors_event_t event;
   dht.temperature().getEvent(&event);
   digitalWrite(DHT5V, LOW);
