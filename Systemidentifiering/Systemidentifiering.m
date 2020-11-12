@@ -9,20 +9,22 @@ clc
 
 % Data
 run data.m
-temp = temp(200:end);
-time = 0:5:(length(temp)*5-5);
+temp = temp(200:end);           % Remove start 
+time = 0:5:(length(temp)*5-5);  % 0.2 Hz 
 
 % Model
 s = tf("s");
-K = 23-temp(1);
+K = temp(end)-temp(1);
 T = 6000;
 G = (K/(1+s*T)) +temp(1);
 
 % Plot
+data_red = 10;      % Reduce data point for plot
+
 figure
-plot(time, temp, "r")
+plot(time(1:data_red:length(time)), temp(1:data_red:length(temp)), "r")
 hold on
 step(G)
-
 ylabel("Temperature (°C)")
 legend("Data", "Model", 'Location', 'best')
+axis([0, 3*10^4, 21, 24])
