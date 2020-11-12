@@ -8,7 +8,7 @@ clear
 clc
 
 % Data
-run data.m
+load data.mat
 temp = temp(200:end);           % Remove start 
 time = 0:5:(length(temp)*5-5);  % 0.2 Hz 
 
