@@ -1,6 +1,6 @@
 /*
   ------------------------------
-    System Identification (Step Response)
+    Step Response
     Verision: 1.0
   ------------------------------
 */
