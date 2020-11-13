@@ -1,12 +1,12 @@
 # Termostatsystem  
 Styrning av termostaten på ett element via kaskadreglering.  
   
-# Blockdiagram  
-![Blockdiagram](https://github.com/TantDre/Termostatsystem/blob/master/Blockdiagram.png?raw=true)
-  
 # Version 
 v1: Av och på reglering   
 v2: PID reglering  
+  
+# Blockdiagram  
+![Blockdiagram](https://github.com/TantDre/Termostatsystem/blob/master/Blockdiagram.png?raw=true)
   
 # Kopplingsschema  
 Arduino: Uno  
