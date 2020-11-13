@@ -8,6 +8,7 @@ v2 (unstable) : PID reglering
 v3 (future)   : MPC
   
 # Blockdiagram  
+Beskrivning av reglersystemet.  
 ![Blockdiagram](https://github.com/TantDre/Termostatsystem/blob/master/Blockdiagram.png?raw=true)
   
 # Kopplingsschema  
