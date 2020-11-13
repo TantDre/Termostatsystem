@@ -11,5 +11,5 @@ v2: PID reglering
 # Kopplingsschema  
 ![Kopplingsschema](https://github.com/TantDre/Termostatsystem/blob/master/Kopplingsschema.png?raw=true)
   
-# System
+# System test och modell
 ![System](https://github.com/TantDre/Termostatsystem/blob/master/Systemidentifiering/Test_Plot.png?raw=true)
