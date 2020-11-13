@@ -1,17 +1,19 @@
 # Termostatsystem  
 Styrning av termostaten på ett element via kaskadreglering.  
+Framtida förbättringar är framkoppling av utomhustemperaturen och loggning.
   
 # Version 
-v1: Av och på reglering   
-v2: PID reglering  
+v1 (release)  : Av och på reglering   
+v2 (unstable) : PID reglering  
+v3 (future)   : MPC
   
 # Blockdiagram  
 ![Blockdiagram](https://github.com/TantDre/Termostatsystem/blob/master/Blockdiagram.png?raw=true)
   
 # Kopplingsschema  
-Arduino: Uno  
-Servo: MG 995  
-Sensor: DHT 22  
+Arduino : Uno  
+Servo   : MG 995  
+Sensor  : DHT 22  
   
 ![Kopplingsschema](https://github.com/TantDre/Termostatsystem/blob/master/Kopplingsschema.png?raw=true)
   
