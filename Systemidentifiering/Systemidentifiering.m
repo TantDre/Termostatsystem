@@ -14,8 +14,8 @@ time = 0:5:(length(temp)*5-5);  % 0.2 Hz
 
 % Model
 s = tf("s");
-K = temp(end)-temp(1);
-T = 9000;
+K = 2.4;
+T = 8500;
 G = (K/(1+s*T)) +temp(1);
 
 % Plot
