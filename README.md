@@ -16,5 +16,5 @@ Sensor: DHT 22
 ![Kopplingsschema](https://github.com/TantDre/Termostatsystem/blob/master/Kopplingsschema.png?raw=true)
   
 # System test och modell
-Stegsvar utan reglering  
+Stegsvar utan reglering.    
 ![System](https://github.com/TantDre/Termostatsystem/blob/master/Systemidentifiering/Test_Plot.png?raw=true)
