@@ -1,7 +1,7 @@
 /*
   ------------------------------
     Thermostat Control System
-    Verision: 2.0
+    Verision: 2.1
   ------------------------------
 */
 
@@ -63,9 +63,9 @@ float PID()
 { 
   // Variables
   float u, e, kp, ki, kd, In, v, P, I, D;
-  kp = 0.1;
-  ki = 0.01;
-  kd = 0.001;
+  kp = 2.4 / 1000;
+  ki = kp / 8500;
+  kd = ki / 100;
 
   // Error
   e = refTemp - currTemp;
