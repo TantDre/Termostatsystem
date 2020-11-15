@@ -28,6 +28,11 @@ float currTemp = 20.0;
 float calibration = 23.10 - 22.7; // DHT - Fluke  // 2020-11-09
 float refTemp = 22.0;
 
+// PID
+float acc_error = 0;
+float prev_error = 0;
+float Ts = 1; 
+
 // ---------- Setup ----------
 void setup() 
 {
@@ -53,12 +58,53 @@ void setup()
   Serial.println(F("Termostat is now running:"));
 }
 
+// ---------- PID Controller ----------
+float PID()
+{ 
+  // Variables
+  float u, e, kp, ki, kd, In, v, P, I, D;
+  kp = 0.1;
+  ki = 0.01;
+  kd = 0.001;
+
+  // Error
+  e = refTemp - currTemp;
+
+  // PID
+  P = kp * e;
+  I = acc_error + ki * Ts * e;
+  D = kd * (e - prev_error)/Ts;
+  v = P + I + D;
+
+  // Saturation
+  if (v < 0)
+  {
+    u = 0;
+    In = acc_error;
+    
+  } else if (v > 1)
+  {
+    u = 1;
+    In = acc_error;
+  } else
+  {
+    u = v;
+    In = I;
+  }
+
+  // Anti Windup
+  acc_error = In + Ts * (u - v) * kp / ki;
+
+  // Return
+  return u;
+}
+
 // ---------- Loop ----------
 void loop() 
 {
   // Get temperature
   digitalWrite(DHT5V, HIGH);
-  delay(1000);
+  delay(Ts*1000);
   sensors_event_t event;
   dht.temperature().getEvent(&event);
   digitalWrite(DHT5V, LOW);
@@ -75,9 +121,11 @@ void loop()
     Serial.println(currTemp);
   }
 
-  // PID - control
-  
- 
-  // Wait for next cycle
-  delay(59000);
+  // Control
+  int servoAngle = map(PID(), 0, 1, 180, 0);
+
+  // Move Servo
+  servoT.write(servoAngle);
+  Serial.println(servoAngle); 
+   
 }
