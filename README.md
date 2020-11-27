@@ -12,9 +12,9 @@ Beskrivning av reglersystemet.
 ![Blockdiagram](https://github.com/TantDre/Termostatsystem/blob/master/Blockdiagram.png?raw=true)
   
 # Kopplingsschema  
-Arduino : Uno  
-Servo   : MG 995  
-Sensor  : DHT 22  
+Mikrokontroller : Arduino Uno  
+Servo           : MG 995  
+Sensor          : DHT 22  
   
 ![Kopplingsschema](https://github.com/TantDre/Termostatsystem/blob/master/Kopplingsschema.png?raw=true)
   
