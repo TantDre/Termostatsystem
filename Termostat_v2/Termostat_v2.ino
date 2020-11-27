@@ -63,9 +63,9 @@ float PID()
 { 
   // Variables
   float u, e, kp, ki, kd, In, v, P, I, D;
-  kp = 2.4 / 1000;
+  kp = 2.4 / Ts * 1000;
   ki = kp / 8500;
-  kd = ki / 100;
+  kd = ki / 10;
 
   // Error
   e = refTemp - currTemp;
