@@ -5,7 +5,6 @@ Framtida förbättringar är framkoppling av utomhustemperaturen och loggning.
 # Version 
 v1 (release)  : Av och på reglering   
 v2 (stable)   : PID reglering  
-v3 (future)   : MPC
   
 # Blockdiagram  
 Beskrivning av reglersystemet.  
